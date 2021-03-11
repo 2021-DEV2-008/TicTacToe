@@ -8,9 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var game = GameEngine()
+    @State private var gameSize: Int = 3
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            HStack(spacing: 20) {
+                Button("Start new game",
+                       action: { game.startNewGame(ofSize: gameSize) })
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.accentColor)
+                    .cornerRadius(8)
+                Stepper("Size: \(gameSize)", value: $gameSize)
+            }
+        }
+        .padding()
     }
 }
 
