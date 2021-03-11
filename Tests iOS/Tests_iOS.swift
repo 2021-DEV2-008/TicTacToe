@@ -24,5 +24,8 @@ class Tests_iOS: XCTestCase {
         
         // Total of state values should be set back to 0.
         XCTAssertEqual(allStates.map(\.rawValue).reduce(0, +), 0)
+        
+        // Number of moves should be set back to 0.
+        XCTAssertEqual(gameEngine.numberOfMoves, 0)
     }
 }
