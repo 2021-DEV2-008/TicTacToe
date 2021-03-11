@@ -14,11 +14,17 @@ class GameEngine: ObservableObject {
         case o = 2
     }
     
-    @Published private(set) var size: Int = 0
+    @Published private(set) var size: Int = 3
     @Published private(set) var grid = [[State]]()
     private(set) var numberOfMoves: Int = 0
     
+    init() {
+        startNewGame(ofSize: size)
+    }
+    
     func startNewGame(ofSize size: Int) {
+        self.objectWillChange.send()
+        
         self.size = size
         grid = Array(repeating: Array(repeating: .blank,
                                       count: size),
