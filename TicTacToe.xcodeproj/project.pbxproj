@@ -15,6 +15,10 @@
 		371D0EAE25FA524A00A113BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D0E8325FA524500A113BB /* ContentView.swift */; };
 		371D0EAF25FA524A00A113BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 371D0E8425FA524A00A113BB /* Assets.xcassets */; };
 		371D0EB025FA524A00A113BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 371D0E8425FA524A00A113BB /* Assets.xcassets */; };
+		371D0EC825FA52EE00A113BB /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D0EC725FA52EE00A113BB /* GameEngine.swift */; };
+		371D0EC925FA52EE00A113BB /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D0EC725FA52EE00A113BB /* GameEngine.swift */; };
+		371D0ECA25FA52EE00A113BB /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D0EC725FA52EE00A113BB /* GameEngine.swift */; };
+		371D0ECB25FA52EE00A113BB /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371D0EC725FA52EE00A113BB /* GameEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,7 @@
 		371D0EA425FA524A00A113BB /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		371D0EA825FA524A00A113BB /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		371D0EAA25FA524A00A113BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		371D0EC725FA52EE00A113BB /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				371D0E8225FA524500A113BB /* TicTacToeApp.swift */,
+				371D0EC725FA52EE00A113BB /* GameEngine.swift */,
 				371D0E8325FA524500A113BB /* ContentView.swift */,
 				371D0E8425FA524A00A113BB /* Assets.xcassets */,
 			);
@@ -309,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				371D0EAD25FA524A00A113BB /* ContentView.swift in Sources */,
+				371D0EC825FA52EE00A113BB /* GameEngine.swift in Sources */,
 				371D0EAB25FA524A00A113BB /* TicTacToeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				371D0EAE25FA524A00A113BB /* ContentView.swift in Sources */,
+				371D0EC925FA52EE00A113BB /* GameEngine.swift in Sources */,
 				371D0EAC25FA524A00A113BB /* TicTacToeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				371D0E9E25FA524A00A113BB /* Tests_iOS.swift in Sources */,
+				371D0ECA25FA52EE00A113BB /* GameEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				371D0EA925FA524A00A113BB /* Tests_macOS.swift in Sources */,
+				371D0ECB25FA52EE00A113BB /* GameEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
