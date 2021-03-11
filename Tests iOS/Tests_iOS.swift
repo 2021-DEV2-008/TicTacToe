@@ -28,4 +28,19 @@ class Tests_iOS: XCTestCase {
         // Number of moves should be set back to 0.
         XCTAssertEqual(gameEngine.numberOfMoves, 0)
     }
+    
+    func testNewTurn() throws {
+        gameEngine.startNewGame(ofSize: 3)
+        
+        // First player is always X.
+        XCTAssertEqual(gameEngine.currentPlayer, .x)
+        
+        // After a new turn, player should be O.
+        gameEngine.newTurn()
+        XCTAssertEqual(gameEngine.currentPlayer, .o)
+        
+        // After a second turn, player should be set back to X.
+        gameEngine.newTurn()
+        XCTAssertEqual(gameEngine.currentPlayer, .x)
+    }
 }

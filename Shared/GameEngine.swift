@@ -16,6 +16,7 @@ class GameEngine: ObservableObject {
     
     @Published private(set) var size: Int = 3
     @Published private(set) var grid = [[State]]()
+    private(set) var currentPlayer: State = .x
     private(set) var numberOfMoves: Int = 0
     
     init() {
@@ -29,6 +30,11 @@ class GameEngine: ObservableObject {
         grid = Array(repeating: Array(repeating: .blank,
                                       count: size),
                      count: size)
+        currentPlayer = .x
         numberOfMoves = 0
+    }
+    
+    func newTurn() {
+        currentPlayer = currentPlayer == .x ? .o : .x
     }
 }
