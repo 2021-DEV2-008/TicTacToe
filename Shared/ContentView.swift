@@ -9,19 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var game = GameEngine()
-    @State private var gameSize: Int = 3
+    @State private var newGameSize: Int = 3
     
     var body: some View {
         VStack {
             HStack(spacing: 20) {
                 Button("Start new game",
-                       action: { game.startNewGame(ofSize: gameSize) })
+                       action: { game.startNewGame(ofSize: newGameSize) })
                     .foregroundColor(.white)
                     .padding()
                     .frame(maxWidth: .infinity)
                     .background(Color.accentColor)
                     .cornerRadius(8)
-                Stepper("Size: \(gameSize)", value: $gameSize)
+                Stepper("Size: \(newGameSize)", value: $newGameSize)
             }
         }
         .padding()
