@@ -47,7 +47,9 @@ class GameEngine: ObservableObject {
         guard grid[x][y] == .blank else {
             return
         }
-        
+
+        objectWillChange.send()
+
         // Set new state at position.
         grid[x][y] = state
         

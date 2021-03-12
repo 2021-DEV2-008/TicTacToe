@@ -14,15 +14,27 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Text("Current player:")
+                if game.currentPlayer == .x {
+                    Image(systemName: "xmark")
+                } else {
+                    Image(systemName: "circle")
+                }
+            }
+            
             GeometryReader { proxy in
                 VStack(spacing: margin) {
                     ForEach(0..<game.size, id: \.self) { line in
                         HStack(spacing: margin) {
                             ForEach(0..<game.size, id: \.self) { row in
                                 Group {
-                                    switch game.grid[line][row] {
+                                    switch game.grid[row][line] {
                                     case .blank:
-                                        Button(action: {}) {
+                                        Button(action: {
+                                            guard game.gameEnd == nil else { return }
+                                            game.makeMove(x: row, y: line, state: game.currentPlayer)
+                                        }) {
                                             Image(systemName: "circle")
                                                 .resizable()
                                                 .opacity(0)
@@ -30,9 +42,11 @@ struct ContentView: View {
                                     case .x:
                                         Image(systemName: "xmark")
                                             .resizable()
+                                            .foregroundColor(.blue)
                                     case .o:
                                         Image(systemName: "circle")
                                             .resizable()
+                                            .foregroundColor(.red)
                                     }
                                 }
                                 .frame(width: pieceSize(in: proxy.size.width),
@@ -48,6 +62,17 @@ struct ContentView: View {
                         }
                     }
                 }
+            }
+            
+            switch game.gameEnd {
+            case .draw:
+                Text("It's a draw 😢")
+            case .winnerX:
+                Text("X's are the best! ☠️")
+            case .winnerO:
+                Text("O's rules! 🌝")
+            case nil:
+                Text("Game's on…")
             }
             
             HStack(spacing: 20) {
