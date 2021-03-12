@@ -29,6 +29,9 @@ class Tests_iOS: XCTestCase {
         
         // Number of moves should be set back to 0.
         XCTAssertEqual(gameEngine.numberOfMoves, 0)
+        
+        // No winner yet.
+        XCTAssertNil(gameEngine.gameEnd)
     }
     
     func testNewTurn() throws {
@@ -57,5 +60,83 @@ class Tests_iOS: XCTestCase {
         // The position should still be the first played state, and number of moves not incremented.
         XCTAssertEqual(gameEngine.grid[0][0], .x)
         XCTAssertEqual(gameEngine.numberOfMoves, 1)
+    }
+    
+    func testEndOfGameWithRowFullOfXs() throws {
+        gameEngine.makeMove(x: 0, y: 0, state: .x)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 1, y: 0, state: .x)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 2, y: 0, state: .x)
+        
+        // Row is full of X's, winner should be X.
+        XCTAssertEqual(gameEngine.gameEnd, .winnerX)
+    }
+    
+    func testEndOfGameWithLineFullOfOs() throws {
+        gameEngine.makeMove(x: 0, y: 0, state: .o)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 0, y: 1, state: .o)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 0, y: 2, state: .o)
+        
+        // Line is full of O's, winner should be O.
+        XCTAssertEqual(gameEngine.gameEnd, .winnerO)
+    }
+    
+    func testEndOfGameWithWinningDiagonal() throws {
+        gameEngine.makeMove(x: 0, y: 0, state: .x)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 1, y: 1, state: .x)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 2, y: 2, state: .x)
+        
+        // Line is mixed, game is not ended.
+        XCTAssertEqual(gameEngine.gameEnd, .winnerX)
+    }
+    
+    func testEndOfGameWithWinningInverseDiagonal() throws {
+        gameEngine.makeMove(x: 0, y: 2, state: .o)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 1, y: 1, state: .o)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 2, y: 0, state: .o)
+        
+        // Line is mixed, game is not ended.
+        XCTAssertEqual(gameEngine.gameEnd, .winnerO)
+    }
+    
+    func testEndOfGameWithMixedRow() throws {
+        gameEngine.makeMove(x: 0, y: 0, state: .x)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 1, y: 0, state: .o)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 2, y: 0, state: .x)
+        
+        // Line is mixed, game is not ended.
+        XCTAssertNil(gameEngine.gameEnd)
+    }
+
+    func testEndOfGameWithNoWinner() throws {
+        gameEngine.makeMove(x: 0, y: 0, state: .x)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 1, y: 0, state: .o)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 2, y: 0, state: .x)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 0, y: 1, state: .x)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 1, y: 1, state: .o)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 2, y: 1, state: .x)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 0, y: 2, state: .o)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 1, y: 2, state: .x)
+        XCTAssertNil(gameEngine.gameEnd)
+        gameEngine.makeMove(x: 2, y: 2, state: .o)
+        
+        // All positions played.
+        XCTAssertEqual(gameEngine.gameEnd, .draw)
     }
 }
