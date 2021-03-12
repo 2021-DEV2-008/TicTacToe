@@ -13,26 +13,26 @@ class GameEngine: ObservableObject {
         case x = 1
         case o = 2
     }
-    
+
     enum GameEnd {
         case winnerX
         case winnerO
         case draw
     }
-    
+
     @Published private(set) var size: Int = 3
     @Published private(set) var grid = [[State]]()
     @Published private(set) var gameEnd: GameEnd?
     private(set) var currentPlayer: State = .x
     private(set) var numberOfMoves: Int = 0
-    
+
     init() {
         startNewGame(ofSize: size)
     }
-    
+
     func startNewGame(ofSize size: Int) {
         objectWillChange.send()
-        
+
         self.size = size
         grid = Array(repeating: Array(repeating: .blank,
                                       count: size),
@@ -41,7 +41,7 @@ class GameEngine: ObservableObject {
         numberOfMoves = 0
         gameEnd = nil
     }
-    
+
     func makeMove(x: Int, y: Int, state: State) {
         // Check if position hasn't been played yet.
         guard grid[x][y] == .blank else {
@@ -52,10 +52,10 @@ class GameEngine: ObservableObject {
 
         // Set new state at position.
         grid[x][y] = state
-        
+
         // Increment the number of moves
         numberOfMoves += 1
-        
+
         // Check end of game.
         if let gameEnd = checkGameEnd(withLastMoveAtX: x, y: y) {
             self.gameEnd = gameEnd
@@ -63,12 +63,12 @@ class GameEngine: ObservableObject {
             newTurn()
         }
     }
-    
+
     func newTurn() {
         currentPlayer = currentPlayer == .x ? .o : .x
     }
-    
-    func checkGameEnd(withLastMoveAtX x: Int, y: Int) -> GameEnd?  {
+
+    func checkGameEnd(withLastMoveAtX x: Int, y: Int) -> GameEnd? {
         // Check played row.
         let row = grid[x]
         if let winningRow = checkWinner(in: row) {
@@ -104,12 +104,12 @@ class GameEngine: ObservableObject {
 
         return nil
     }
-    
+
     private func checkWinner(in items: [State]) -> GameEnd? {
         // If items not fully played, no winner.
         guard !items.contains(.blank) else { return nil }
 
-        let sum = items.reduce(0, { $0 + $1.rawValue })
+        let sum = items.reduce(0) { $0 + $1.rawValue }
 
         if sum == State.x.rawValue * size {
             // Full of X's
