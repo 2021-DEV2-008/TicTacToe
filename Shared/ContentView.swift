@@ -49,11 +49,11 @@ struct ContentView: View {
                                             .foregroundColor(.red)
                                     }
                                 }
-                                .frame(width: pieceSize(in: proxy.size.width),
-                                       height: pieceSize(in: proxy.size.width))
+                                .frame(width: pieceSize(in: proxy.size),
+                                       height: pieceSize(in: proxy.size))
                                 
                                 if row < game.size - 1 {
-                                    Divider().frame(maxHeight: pieceSize(in: proxy.size.width))
+                                    Divider().frame(maxHeight: pieceSize(in: proxy.size))
                                 }
                             }
                         }
@@ -89,8 +89,9 @@ struct ContentView: View {
         .padding()
     }
     
-    private func pieceSize(in width: CGFloat) -> CGFloat {
-        (width - (margin * ( 2 + ((CGFloat(game.size) - 1) * 2)))) / CGFloat(game.size)
+    private func pieceSize(in size: CGSize) -> CGFloat {
+        let minSize = min(size.width, size.height)
+        return (minSize - (margin * ( 2 + ((CGFloat(game.size) - 1) * 2)))) / CGFloat(game.size)
     }
 }
 
