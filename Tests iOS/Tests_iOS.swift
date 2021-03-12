@@ -9,10 +9,12 @@ import XCTest
 
 class Tests_iOS: XCTestCase {
     var gameEngine = GameEngine()
+    
+    override func setUpWithError() throws {
+        gameEngine.startNewGame(ofSize: 3)
+    }
 
     func testNewGameData() throws {
-        gameEngine.startNewGame(ofSize: 3)
-        
         // Size should be 3.
         XCTAssertEqual(gameEngine.size, 3)
         
@@ -30,8 +32,6 @@ class Tests_iOS: XCTestCase {
     }
     
     func testNewTurn() throws {
-        gameEngine.startNewGame(ofSize: 3)
-        
         // First player is always X.
         XCTAssertEqual(gameEngine.currentPlayer, .x)
         
@@ -42,5 +42,20 @@ class Tests_iOS: XCTestCase {
         // After a second turn, player should be set back to X.
         gameEngine.newTurn()
         XCTAssertEqual(gameEngine.currentPlayer, .x)
+    }
+    
+    func testMakeMove() throws {
+        gameEngine.makeMove(x: 0, y: 0, state: .x)
+        
+        // Check if position has been correctly set, and number of moves incremented
+        XCTAssertEqual(gameEngine.grid[0][0], .x)
+        XCTAssertEqual(gameEngine.numberOfMoves, 1)
+        
+        // Try to make another move to the same position.
+        gameEngine.makeMove(x: 0, y: 0, state: .o)
+        
+        // The position should still be the first played state, and number of moves not incremented.
+        XCTAssertEqual(gameEngine.grid[0][0], .x)
+        XCTAssertEqual(gameEngine.numberOfMoves, 1)
     }
 }

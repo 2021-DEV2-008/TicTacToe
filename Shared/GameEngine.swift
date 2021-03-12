@@ -34,6 +34,19 @@ class GameEngine: ObservableObject {
         numberOfMoves = 0
     }
     
+    func makeMove(x: Int, y: Int, state: State) {
+        // Check if position hasn't been played yet.
+        guard grid[x][y] == .blank else {
+            return
+        }
+        
+        // Set new state at position.
+        grid[x][y] = state
+        
+        // Increment the number of moves
+        numberOfMoves += 1
+    }
+    
     func newTurn() {
         currentPlayer = currentPlayer == .x ? .o : .x
     }
